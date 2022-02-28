@@ -1,0 +1,62 @@
+name: Docker Build and Push
+inputs:
+  octopus_server:
+    description: 'Octopus cloud URL'
+    required: true
+  octopus_apikey:
+    description: 'Octopus API key'
+    required: true
+  octopus_project:
+    description: 'The Octopus space and project name'
+    required: true
+  octopus_user_id:
+    description: 'The Octopus user to assign to the space'
+    required: true
+  aws_access_key:
+    description: 'The AWS access key'
+    required: true
+  aws_secret_key:
+    description: 'The AWS secret key'
+    required: true
+outputs:
+  octopus_space_id:
+    description: "The Octopus space ID"
+    value: ${{ steps.terraform_output.outputs.octopus_space_id }}
+runs:
+  using: "composite"
+  steps:
+    - name: Clone code repo
+      uses: actions/checkout@v2
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v1
+    - name: Install AWS CLI
+      uses: unfor19/install-aws-cli-action@v1
+    - name: Create Terraform state S3 bucket
+      run: |
+        aws bucket-exists --bucket app-builder-e09dfc6c-a8c9-4df6-9fbe-ceff43782d9f
+        if [[ $? -ne 0 ]]; then        
+          aws create-bucket --bucket app-builder-e09dfc6c-a8c9-4df6-9fbe-ceff43782d9f
+        fi
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      shell: bash
+    - name: Terraform Apply
+      env:
+        AWS_ACCESS_KEY_ID: ${{ input.aws_access_key }}
+        AWS_SECRET_ACCESS_KEY: ${{ input.aws_secret_key }}
+      run: >
+        terraform apply 
+        -auto-approve 
+        -var="octopus_server=${{ input.octopus_server }}" 
+        -var="octopus_apikey=${{ input.octopus_apikey }}"
+        -var="octopus_space=${{ input.octopus_space }}"
+        -var="octopus_user_id=${{ input.octopus_user_id }}"
+      shell: bash
+    - name: Terraform Collect Output
+      id: terraform_output
+      env:
+        AWS_ACCESS_KEY_ID: ${{ input.aws_access_key }}
+        AWS_SECRET_ACCESS_KEY: ${{ input.aws_secret_key }}
+      run: echo "::set-output name=octopus_space_id::$(terraform output -raw octopus_space_id)"
+      shell: bash
