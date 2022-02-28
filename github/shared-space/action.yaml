@@ -70,6 +70,7 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: |
         SPACE_ID=$(terraform output -raw octopus_space_id)
+        echo "Space ID: ${SPACE_ID}"
         echo "::set-output name=octopus_space_id::${SPACE_ID}"
       working-directory: octopus
       shell: bash
