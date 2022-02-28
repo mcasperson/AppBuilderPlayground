@@ -68,10 +68,9 @@ runs:
       env:
         AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
-      run: |
-        terraform output -raw octopus_space_id
-        SPACE_ID=$(terraform output -raw octopus_space_id)
-        echo "Space ID: ${SPACE_ID}"
-        echo "::set-output name=octopus_space_id::${SPACE_ID}"
+      run: terraform output -raw octopus_space_id
       working-directory: octopus
+      shell: bash
+    - name: Set output vars
+      run: echo "::set-output name=octopus_space_id::${{ steps.terraform_output.outputs.stdout }}"
       shell: bash
