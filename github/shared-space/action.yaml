@@ -6,8 +6,8 @@ inputs:
   octopus_apikey:
     description: 'Octopus API key'
     required: true
-  octopus_project:
-    description: 'The Octopus space and project name'
+  octopus_space:
+    description: 'The Octopus space name'
     required: true
   octopus_user_id:
     description: 'The Octopus user to assign to the space'
@@ -37,10 +37,10 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: |
         # Check to see if the bucket exists
-        aws s3api head-bucket --bucket app-builder-21d7989a-b40f-4a58-95a5-df8c7d8f8109 --region us-east-1 2>/dev/null
+        aws s3api head-bucket --bucket app-builder-0eeb52d7-2df7-4605-b8c7-d22afc9b018a --region us-east-1 2>/dev/null
         # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3 mb s3://app-builder-21d7989a-b40f-4a58-95a5-df8c7d8f8109 --region us-east-1
+          aws s3 mb s3://app-builder-0eeb52d7-2df7-4605-b8c7-d22afc9b018a --region us-east-1
         fi
       shell: "bash -l {0}" # Allow commands to fail by removing the default "-e" argument
     - name: Terraform Init
