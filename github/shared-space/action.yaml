@@ -37,10 +37,10 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: |
         # Check to see if the bucket exists
-        aws s3api head-bucket --bucket app-builder-58b75bdb-dc51-4f2a-a96e-ef596dcf87df --region us-east-1 2>/dev/null
+        aws s3api head-bucket --bucket app-builder-21d7989a-b40f-4a58-95a5-df8c7d8f8109 --region us-east-1 2>/dev/null
         # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3 mb s3://app-builder-58b75bdb-dc51-4f2a-a96e-ef596dcf87df --region us-east-1
+          aws s3 mb s3://app-builder-21d7989a-b40f-4a58-95a5-df8c7d8f8109 --region us-east-1
         fi
       shell: "bash -l {0}" # Allow commands to fail by removing the default "-e" argument
     - name: Terraform Init
