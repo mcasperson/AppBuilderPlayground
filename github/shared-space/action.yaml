@@ -34,12 +34,12 @@ runs:
     - name: Create Terraform state S3 bucket
       run: |
         # Check to see if the bucket exists
-        aws s3api head-bucket --bucket app-builder-badecc9f-ddcf-498c-b2ea-aa6e20387d56 2>/dev/null
+        aws s3api head-bucket --bucket app-builder-d46be7fd-3cd0-43b2-a7f8-88f783d6fe25 2>/dev/null
         # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3control create-bucket --bucket app-builder-badecc9f-ddcf-498c-b2ea-aa6e20387d56
+          aws s3control create-bucket --bucket app-builder-d46be7fd-3cd0-43b2-a7f8-88f783d6fe25
         fi
-      shell: "bash -o pipefail -l {0}" # Allow commands to fail by removing the default "-e" argument
+      shell: "bash -l {0}" # Allow commands to fail by removing the default "-e" argument
     - name: Terraform Init
       id: init
       run: terraform init
