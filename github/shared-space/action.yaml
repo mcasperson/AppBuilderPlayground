@@ -32,12 +32,15 @@ runs:
     - name: Install AWS CLI
       uses: unfor19/install-aws-cli-action@v1
     - name: Create Terraform state S3 bucket
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: |
         # Check to see if the bucket exists
-        aws s3api head-bucket --bucket app-builder-d46be7fd-3cd0-43b2-a7f8-88f783d6fe25 2>/dev/null
+        aws s3api head-bucket --bucket app-builder-075d30d3-d72e-4c50-9ec9-5c3551b7eaa3 2>/dev/null
         # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3control create-bucket --bucket app-builder-d46be7fd-3cd0-43b2-a7f8-88f783d6fe25
+          aws s3control create-bucket --bucket app-builder-075d30d3-d72e-4c50-9ec9-5c3551b7eaa3
         fi
       shell: "bash -l {0}" # Allow commands to fail by removing the default "-e" argument
     - name: Terraform Init
