@@ -37,15 +37,16 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: |
         # Check to see if the bucket exists
-        aws s3api head-bucket --bucket app-builder-f9bf51ba-6180-4154-8424-aff6e39cffac --region us-east-1
+        aws s3api head-bucket --bucket app-builder-5e79c572-556e-4157-95b1-54978740dfa7 --region us-east-1 2>/dev/null
         # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3 mb s3://app-builder-f9bf51ba-6180-4154-8424-aff6e39cffac --region us-east-1
+          aws s3 mb s3://app-builder-5e79c572-556e-4157-95b1-54978740dfa7 --region us-east-1
         fi
       shell: "bash -l {0}" # Allow commands to fail by removing the default "-e" argument
     - name: Terraform Init
       id: init
       run: terraform init
+      working-directory: octopus
       shell: bash
     - name: Terraform Apply
       env:
@@ -58,6 +59,7 @@ runs:
         -var="octopus_apikey=${{ inputs.octopus_apikey }}"
         -var="octopus_space=${{ inputs.octopus_space }}"
         -var="octopus_user_id=${{ inputs.octopus_user_id }}"
+      working-directory: octopus
       shell: bash
     - name: Terraform Collect Output
       id: terraform_output
@@ -65,4 +67,5 @@ runs:
         AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: echo "::set-output name=octopus_space_id::$(terraform output -raw octopus_space_id)"
+      working-directory: octopus
       shell: bash
