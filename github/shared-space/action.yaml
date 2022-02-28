@@ -33,30 +33,31 @@ runs:
       uses: unfor19/install-aws-cli-action@v1
     - name: Create Terraform state S3 bucket
       run: |
-        aws bucket-exists --bucket app-builder-e09dfc6c-a8c9-4df6-9fbe-ceff43782d9f
+        aws bucket-exists --bucket app-builder-79e3afa2-d929-492e-b303-b653c521e3be
         if [[ $? -ne 0 ]]; then        
-          aws create-bucket --bucket app-builder-e09dfc6c-a8c9-4df6-9fbe-ceff43782d9f
+          aws create-bucket --bucket app-builder-79e3afa2-d929-492e-b303-b653c521e3be
         fi
+      shell: bash
     - name: Terraform Init
       id: init
       run: terraform init
       shell: bash
     - name: Terraform Apply
       env:
-        AWS_ACCESS_KEY_ID: ${{ input.aws_access_key }}
-        AWS_SECRET_ACCESS_KEY: ${{ input.aws_secret_key }}
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: >
         terraform apply 
         -auto-approve 
-        -var="octopus_server=${{ input.octopus_server }}" 
-        -var="octopus_apikey=${{ input.octopus_apikey }}"
-        -var="octopus_space=${{ input.octopus_space }}"
-        -var="octopus_user_id=${{ input.octopus_user_id }}"
+        -var="octopus_server=${{ inputs.octopus_server }}" 
+        -var="octopus_apikey=${{ inputs.octopus_apikey }}"
+        -var="octopus_space=${{ inputs.octopus_space }}"
+        -var="octopus_user_id=${{ inputs.octopus_user_id }}"
       shell: bash
     - name: Terraform Collect Output
       id: terraform_output
       env:
-        AWS_ACCESS_KEY_ID: ${{ input.aws_access_key }}
-        AWS_SECRET_ACCESS_KEY: ${{ input.aws_secret_key }}
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
       run: echo "::set-output name=octopus_space_id::$(terraform output -raw octopus_space_id)"
       shell: bash
