@@ -21,7 +21,7 @@ inputs:
 outputs:
   octopus_space_id:
     description: "The Octopus space ID"
-    value: ${{ steps.terraform_output.outputs.octopus_space_id }}
+    value: ${{ steps.step_output.outputs.octopus_space_id }}
 runs:
   using: "composite"
   steps:
@@ -72,5 +72,6 @@ runs:
       working-directory: octopus
       shell: bash
     - name: Set output vars
+      id: step_output
       run: echo "::set-output name=octopus_space_id::${{ steps.terraform_output.outputs.stdout }}"
       shell: bash

@@ -76,11 +76,3 @@ runs:
         -var="github_username=${{ inputs.github_username }}"
       working-directory: octopus/shared-infrastructure
       shell: bash
-    - name: Terraform Collect Output
-      id: terraform_output
-      env:
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws_access_key }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws_secret_key }}
-      run: echo "::set-output name=octopus_space_id::$(terraform output -raw octopus_space_id)"
-      working-directory: octopus/shared-infrastructure
-      shell: bash
