@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "app-builder-5e79c572-556e-4157-95b1-54978740dfa7"
+    bucket = "app-builder-e6cb686a-5e26-4f6e-a089-a9b336df705a"
     key    = "appbuilder-shared-space"
     region = "us-east-1"
   }
