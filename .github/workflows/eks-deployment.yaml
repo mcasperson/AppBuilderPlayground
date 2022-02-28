@@ -12,8 +12,8 @@ jobs:
       - name: Build
         uses: ./github/shared-space
         with:
-          octopus_server_url: ${{ secrets.OCTOPUS_SERVER }}
-          octopus_api_token: ${{ secrets.OCTOPUS_APIKEY }}
+          octopus_server: ${{ secrets.OCTOPUS_SERVER }}
+          octopus_apikey: ${{ secrets.OCTOPUS_APIKEY }}
           octopus_project: "Octo App Builder"
           octopus_user_id: "Users-141"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
