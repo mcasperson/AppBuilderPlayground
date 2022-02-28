@@ -61,7 +61,6 @@ runs:
         -var="octopus_apikey=${{ inputs.octopus_apikey }}"
         -var="octopus_space=${{ inputs.octopus_space }}"
         -var="octopus_user_id=${{ inputs.octopus_user_id }}"
-        -var="github_repo=${{ inputs.github_repo }}"
       working-directory: octopus
       shell: bash
     - name: Terraform Collect Output
