@@ -33,11 +33,13 @@ runs:
       uses: unfor19/install-aws-cli-action@v1
     - name: Create Terraform state S3 bucket
       run: |
-        aws s3api head-bucket --bucket app-builder-af4d67ee-d87c-47f9-9953-3b945702d17e 2>/dev/null
+        # Check to see if the bucket exists
+        aws s3api head-bucket --bucket app-builder-96b6a471-4ced-4f2c-b0b2-bcccad7f80b3 2>/dev/null
+        # If not, create it
         if [[ $? -ne 0 ]]; then        
-          aws s3control create-bucket --bucket app-builder-af4d67ee-d87c-47f9-9953-3b945702d17e
+          aws s3control create-bucket --bucket app-builder-96b6a471-4ced-4f2c-b0b2-bcccad7f80b3
         fi
-      shell: bash
+      shell: bash -e -o pipefail -l {0}
     - name: Terraform Init
       id: init
       run: terraform init
