@@ -41,3 +41,4 @@ jobs:
         with:
           repository_owner: ${{ github.repository_owner }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_actor: ${{ github.actor }}
