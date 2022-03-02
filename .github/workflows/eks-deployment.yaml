@@ -1,7 +1,9 @@
 name: EKS Deployment
 'on':
   workflow_dispatch: {}
-  push: {}
+  push:
+    paths:
+      - '!.github/badges/*'
 
 jobs:
   build:
