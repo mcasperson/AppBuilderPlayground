@@ -71,5 +71,5 @@ runs:
         -var="aws_region=${{ inputs.aws_region }}"
         -var="github_repo=${{ inputs.github_repo }}"
         -var="github_username=${{ inputs.github_username }}"
-      working-directory: terraform/shared-infrastructure
+      working-directory: terraform/kubernetes-deployment
       shell: bash
