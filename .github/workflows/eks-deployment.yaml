@@ -52,9 +52,9 @@ jobs:
           aws_region: "us-east-1"
           repository_owner: ${{ github.repository_owner }}
 
-      - name: Build Java Microservice
-        uses: ./github/java-microservice
-        with:
-          repository_owner: ${{ github.repository_owner }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_actor: ${{ github.actor }}
+#      - name: Build Java Microservice
+#        uses: ./github/java-microservice
+#        with:
+#          repository_owner: ${{ github.repository_owner }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          github_actor: ${{ github.actor }}
