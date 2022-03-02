@@ -3,6 +3,7 @@ name: EKS Deployment
   workflow_dispatch: {}
   push:
     paths:
+      - '**/*'
       - '!.github/badges/*'
 
 jobs:
