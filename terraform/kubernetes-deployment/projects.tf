@@ -33,8 +33,9 @@ resource "octopusdeploy_deployment_process" "deploy_backend_step1" {
     start_trigger       = "StartWithPrevious"
     target_roles        = ["EKS"]
     action {
-      action_type = "Octopus.KubernetesDeployContainers"
-      name        = "Deploy Backend Service"
+      action_type   = "Octopus.KubernetesDeployContainers"
+      name          = "Deploy Backend Service"
+      run_on_server = true
       package {
         name                      = "backend"
         package_id                = "mcasperson/octopus-java-microservice"
@@ -46,7 +47,7 @@ resource "octopusdeploy_deployment_process" "deploy_backend_step1" {
         feed_id = var.dockerhub_feed_id
         image   = "octopusdeploy/worker-tools:3-ubuntu.18.04"
       }
-      properties = {
+      properties: {
         "Octopus.Action.EnabledFeatures"                             = ",Octopus.Features.KubernetesService,Octopus.Features.KubernetesIngress,Octopus.Features.KubernetesConfigMap,Octopus.Features.KubernetesSecret"
         "Octopus.Action.KubernetesContainers.Replicas"               = "1"
         "Octopus.Action.KubernetesContainers.DeploymentStyle"        = "RollingUpdate"
@@ -69,7 +70,6 @@ resource "octopusdeploy_deployment_process" "deploy_backend_step1" {
         "Octopus.Action.KubernetesContainers.CombinedVolumes"        = "[]"
         "Octopus.Action.KubernetesContainers.PodSecuritySysctls"     = "[]"
         "Octopus.Action.KubernetesContainers.Containers"             = "[{\"IsNew\" = true,\"InitContainer\" = \"False\",\"Ports\" = [],\"EnvironmentVariables\" = [],\"SecretEnvironmentVariables\" = [],\"SecretEnvFromSource\" = [],\"ConfigMapEnvironmentVariables\" = [],\"ConfigMapEnvFromSource\" = [],\"FieldRefEnvironmentVariables\" = [],\"VolumeMounts\" = [],\"AcquisitionLocation\" = \"NotAcquired\",\"Name\" = \"worker\",\"PackageId\" = \"octopusdeploy/tentacle\",\"FeedId\" = \"Feeds-1061\",\"Properties\" = {},\"Command\" = [],\"Args\" = [],\"Resources\" = {\"requests\" = {\"memory\" = \"256Mi\",\"cpu\" = \"\",\"ephemeralStorage\" = \"\"},\"limits\" = {\"memory\" = \"1Gi\",\"cpu\" = \"\",\"ephemeralStorage\" = \"\",\"nvidiaGpu\" = \"\",\"amdGpu\" = \"\"}},\"LivenessProbe\" = {\"failureThreshold\" = \"\",\"initialDelaySeconds\" = \"\",\"periodSeconds\" = \"\",\"successThreshold\" = \"\",\"timeoutSeconds\" = \"\",\"type\" = null,\"exec\" = {\"command\" = []},\"httpGet\" = {\"host\" = \"\",\"path\" = \"\",\"port\" = \"\",\"scheme\" = \"\",\"httpHeaders\" = []},\"tcpSocket\" = {\"host\" = \"\",\"port\" = \"\"}},\"ReadinessProbe\" = {\"failureThreshold\" = \"\",\"initialDelaySeconds\" = \"\",\"periodSeconds\" = \"\",\"successThreshold\" = \"\",\"timeoutSeconds\" = \"\",\"type\" = null,\"exec\" = {\"command\" = []},\"httpGet\" = {\"host\" = \"\",\"path\" = \"\",\"port\" = \"\",\"scheme\" = \"\",\"httpHeaders\" = []},\"tcpSocket\" = {\"host\" = \"\",\"port\" = \"\"}},\"StartupProbe\" = {\"failureThreshold\" = \"\",\"initialDelaySeconds\" = \"\",\"periodSeconds\" = \"\",\"successThreshold\" = \"\",\"timeoutSeconds\" = \"\",\"type\" = null,\"exec\" = {\"command\" = []},\"httpGet\" = {\"host\" = \"\",\"path\" = \"\",\"port\" = \"\",\"scheme\" = \"\",\"httpHeaders\" = []},\"tcpSocket\" = {\"host\" = \"\",\"port\" = \"\"}},\"Lifecycle\" = {},\"SecurityContext\" = {\"allowPrivilegeEscalation\" = \"\",\"privileged\" = \"\",\"readOnlyRootFilesystem\" = \"\",\"runAsGroup\" = \"\",\"runAsNonRoot\" = \"\",\"runAsUser\" = \"\",\"capabilities\" = {\"add\" = [],\"drop\" = []},\"seLinuxOptions\" = {\"level\" = \"\",\"role\" = \"\",\"type\" = \"\",\"user\" = \"\"}}}]"
-        "Octopus.Action.RunOnServer"                                 = "true"
       }
     }
   }
