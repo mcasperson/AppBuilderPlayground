@@ -3,6 +3,11 @@ resource "octopusdeploy_library_variable_set" "octopus_library_variable_set" {
   description = "Variables that relate to working with Octopus itself, such as API keys"
 }
 
+output "octopus_library_variable_set" {
+  value = octopusdeploy_library_variable_set.octopus_library_variable_set.id
+}
+
+
 resource "octopusdeploy_variable" "octopus_admin_api_key" {
   name = "Octopus.AdminApiKey"
   type = "Sensitive"
