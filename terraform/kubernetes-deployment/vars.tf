@@ -33,7 +33,7 @@ variable "octopus_docker_image" {
   nullable = false
 }
 
-variable "octopus_library_variable_set" {
+variable "octopus_library_variable_set_id" {
   type = string
   nullable = false
 }
