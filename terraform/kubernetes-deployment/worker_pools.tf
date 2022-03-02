@@ -1,4 +1,4 @@
 data "octopusdeploy_worker_pools" "ubuntu_worker_pool" {
-  name = "Hosted Ubuntu"
-  take         = 1
+  partial_name = "Hosted Ubuntu"
+  take = 1
 }
