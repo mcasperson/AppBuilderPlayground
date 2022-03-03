@@ -12,7 +12,7 @@ terraform {
 
   backend "s3" {
     bucket = "app-builder-0eeb52d7-2df7-4605-b8c7-d22afc9b018a"
-    key    = "appbuilder-shared-infrastructure"
+    key    = "appbuilder-aws-ecr"
     region = "us-east-1"
   }
 }
