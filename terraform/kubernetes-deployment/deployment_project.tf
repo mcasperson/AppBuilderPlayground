@@ -43,9 +43,9 @@ resource "octopusdeploy_deployment_process" "deploy_backend" {
     name                = "Create an EKS cluster"
     package_requirement = "LetOctopusDecide"
     start_trigger       = "StartAfterPrevious"
-    target_roles        = ["None"]
+    target_roles        = []
     action {
-      action_type    = "Octopus.KubernetesDeployContainers"
+      action_type    = "Octopus.AwsRunScript"
       name           = "Create an EKS Cluster"
       run_on_server  = true
       worker_pool_id = data.octopusdeploy_worker_pools.ubuntu_worker_pool.worker_pools[0].id
