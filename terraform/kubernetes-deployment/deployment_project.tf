@@ -65,7 +65,7 @@ resource "octopusdeploy_deployment_process" "deploy_backend" {
     condition           = "Success"
     name                = "Deploy Backend Service"
     package_requirement = "LetOctopusDecide"
-    start_trigger       = "StartWithPrevious"
+    start_trigger       = "StartAfterPrevious"
     target_roles        = ["Kubernetes"]
     action {
       action_type    = "Octopus.KubernetesDeployContainers"
