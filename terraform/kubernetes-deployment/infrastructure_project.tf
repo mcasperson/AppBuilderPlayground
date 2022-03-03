@@ -32,10 +32,6 @@ resource "octopusdeploy_variable" "aws_account" {
   owner_id = octopusdeploy_project.deploy_backend_project.id
 }
 
-locals {
-  package_name = "backend"
-}
-
 resource "octopusdeploy_deployment_process" "deploy_cluster" {
   project_id = octopusdeploy_project.deploy_infrastructure_project.id
   step {
