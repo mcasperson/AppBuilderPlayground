@@ -112,3 +112,4 @@ runs:
       run: |
         docker build -f java/quarkus-microservice/src/main/docker/Dockerfile.legacy-jar -t ${{ inputs.image_tag }} .
         docker push ${{ inputs.image_tag }}
+      shell: bash
