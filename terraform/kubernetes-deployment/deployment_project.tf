@@ -26,10 +26,10 @@ output "deploy_backend_project_id" {
 }
 
 resource "octopusdeploy_variable" "aws_account" {
-  name       = "AWS Account"
-  type       = "AmazonWebServicesAccount"
-  value      = var.octopus_aws_account_id
-  project_id = octopusdeploy_project.deploy_backend_project.id
+  name     = "AWS Account"
+  type     = "AmazonWebServicesAccount"
+  value    = var.octopus_aws_account_id
+  owner_id = octopusdeploy_project.deploy_backend_project.id
 }
 
 locals {
