@@ -37,3 +37,13 @@ variable "octopus_library_variable_set_id" {
   type = string
   nullable = false
 }
+
+variable "aws_region" {
+  type = string
+  nullable = false
+}
+
+variable "octopus_aws_account_id" {
+  type = string
+  nullable = false
+}

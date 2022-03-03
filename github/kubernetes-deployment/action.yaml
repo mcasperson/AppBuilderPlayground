@@ -15,6 +15,9 @@ inputs:
   octopus_docker_image:
     description: 'The image to be deployed'
     required: true
+  octopus_aws_account_id:
+    description: 'The AWS account id'
+    required: true
   octopus_dockerhub_feed_id:
     description: 'The ID of Dockerhub feed'
     required: true
@@ -84,5 +87,6 @@ runs:
         -var="octopus_application_lifecycle_id=${{ inputs.octopus_application_lifecycle_id }}"
         -var="octopus_docker_image=${{ inputs.octopus_docker_image }}"
         -var="octopus_library_variable_set_id=${{ inputs.octopus_library_variable_set_id }}"
+        -var="aws_region=${{ inputs.aws_region }}"
       working-directory: terraform/kubernetes-deployment
       shell: bash
