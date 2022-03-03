@@ -42,7 +42,7 @@ resource "octopusdeploy_deployment_process" "deploy_backend" {
     name                = "Create an EKS cluster"
     package_requirement = "LetOctopusDecide"
     start_trigger       = "StartAfterPrevious"
-    target_roles        = []
+    target_roles        = ["None"]
     action {
       action_type    = "Octopus.KubernetesDeployContainers"
       name           = "Create an EKS Cluster"
