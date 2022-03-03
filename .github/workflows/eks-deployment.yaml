@@ -44,7 +44,6 @@ jobs:
           octopus_server: ${{ secrets.OCTOPUS_SERVER }}
           octopus_apikey: ${{ secrets.OCTOPUS_APIKEY }}
           octopus_space_id: ${{ steps.shared_space.outputs.octopus_space_id }}
-          octopus_github_docker_feed_id: ${{ steps.shared_resources.outputs.octopus_github_docker_feed_id }}
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: "us-east-1"
