@@ -44,7 +44,7 @@ resource "octopusdeploy_deployment_process" "deploy_backend" {
     start_trigger       = "StartAfterPrevious"
     action {
       action_type    = "Octopus.KubernetesDeployContainers"
-      name           = "Deploy Backend Service"
+      name           = "Create an EKS Cluster"
       run_on_server  = true
       worker_pool_id = data.octopusdeploy_worker_pools.ubuntu_worker_pool.worker_pools[0].id
       properties = {
