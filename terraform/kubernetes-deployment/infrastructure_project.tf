@@ -25,7 +25,7 @@ output "deploy_infrastructure_project" {
   value = octopusdeploy_project.deploy_infrastructure_project.id
 }
 
-resource "octopusdeploy_variable" "aws_account" {
+resource "octopusdeploy_variable" "aws_account_deploy_infrastructure_project" {
   name     = "AWS Account"
   type     = "AmazonWebServicesAccount"
   value    = var.octopus_aws_account_id
