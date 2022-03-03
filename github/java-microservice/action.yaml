@@ -1,7 +1,7 @@
 name: Docker Build and Push
 inputs:
-  ecr_url:
-    description: 'The ECR URL'
+  image_tag:
+    description: 'The ECR Docker image tag'
     required: true
   aws_access_key:
     description: 'The AWS access key'
@@ -108,10 +108,7 @@ runs:
         fi
       shell: bash
 
-    - name: Build and push
-      uses: docker/build-push-action@v2
-      with:
-        push: true
-        file: java/quarkus-microservice/src/main/docker/Dockerfile.legacy-jar
-        context: ./java/quarkus-microservice
-        tags: ${{ inputs.ecr_url }}/octopus-java-microservice:latest
+    - name: Build, tag, and push image to Amazon ECR
+      run: |
+        docker build -f java/quarkus-microservice/src/main/docker/Dockerfile.legacy-jar -t ${{ inputs.image_tag }} .
+        docker push ${{ inputs.image_tag }}
