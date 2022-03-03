@@ -12,6 +12,9 @@ inputs:
   octopus_github_docker_feed_id:
     description: 'The ID of Github docker feed'
     required: true
+  octopus_k8s_feed_id:
+    description: 'The ID of feed used to supply the K8s deployment. This can be a plain docker feed, or an ECR feed.'
+    required: true
   octopus_docker_image:
     description: 'The image to be deployed'
     required: true
