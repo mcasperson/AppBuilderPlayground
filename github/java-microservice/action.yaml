@@ -97,7 +97,7 @@ runs:
         coverage-badge-filename: microservice-utils.svg
         branches-badge-filename: microservice-utils-branches.svg
 
-    - name: Commit the badge (if it changed)
+    - name: Commit the badges (if they changed)
       run: |
         if [[ `git diff --exit-code .github/badges` ]]; then
           git config --global user.name 'Matthew Casperson'
@@ -113,3 +113,4 @@ runs:
         docker build -f java/quarkus-microservice/src/main/docker/Dockerfile.legacy-jar -t ${{ inputs.image_tag }} .
         docker push ${{ inputs.image_tag }}
       shell: bash
+      working-directory: java/quarkus-microservice
